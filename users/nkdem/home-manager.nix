@@ -22,6 +22,7 @@ in {
     pkgs.tree
     pkgs.firefox
     pkgs.rofi
+    pkgs.vscode
   ];
 
   #---------------------------------------------------------------------
@@ -96,4 +97,23 @@ in {
     size = 128;
     x11.enable = true;
   };
+
+      programs.vscode = {
+        enable = true;
+        package = pkgs.vscode;
+        extensions = with pkgs.vscode-extensions; [
+            # ayu-theme.vscode-ayu
+        ];
+        userSettings = {
+            "telemetry.telemetryLevel" = "off";
+            "workbench.colorTheme" = "Ayu Mirage Bordered";
+            "workbench.sideBar.location" = "right";
+            "editor.fontFamily" = "Iosevka";
+            "editor.fontLigatures" = true;
+            "editor.fontSize" = 18;
+            "editor.fontWeight" = "500";
+            "window.zoomLevel" = 2;
+            "terminal.integrated.fontSize" = 18;
+        };
+    };
 }
