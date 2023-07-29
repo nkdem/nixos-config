@@ -3,6 +3,8 @@
 let
   sources = import ../../nix/sources.nix;
 in {
+  imports = [ ./direnv.nix ];
+
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
   home.stateVersion = "18.09";
@@ -51,6 +53,18 @@ in {
 
   programs.git = {
     enable = true;
+    userName = "nkdem";
+    userEmail = "contact@nkdem.net";
+    # Need to fix GPG keys
+    # signing = {
+    #   key = "668FD3DA7D781978";
+    #   signByDefault = true;
+    # };
+    extraConfig = {
+      github.user = "nkdem";
+      push.default = "tracking";
+      init.defaultBranch = "main";
+    };
   };
 
   programs.kitty = {
@@ -103,6 +117,9 @@ in {
         package = pkgs.vscode;
         extensions = with pkgs.vscode-extensions; [
             # ayu-theme.vscode-ayu
+            bbenoist.nix
+            mkhl.direnv
+            rust-lang.rust-analyzer
         ];
         userSettings = {
             "telemetry.telemetryLevel" = "off";
@@ -110,10 +127,11 @@ in {
             "workbench.sideBar.location" = "right";
             "editor.fontFamily" = "Iosevka";
             "editor.fontLigatures" = true;
-            "editor.fontSize" = 18;
+            "editor.fontSize" = 15;
             "editor.fontWeight" = "500";
-            "window.zoomLevel" = 2;
-            "terminal.integrated.fontSize" = 18;
+            "window.zoomLevel" = 0.5;
+            "terminal.integrated.fontSize" = 15;
+            "editor.titleBar.enabled" = false;
         };
     };
 }
