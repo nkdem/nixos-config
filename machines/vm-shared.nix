@@ -79,7 +79,6 @@
     fontDir.enable = true;
 
     fonts = [
-      pkgs.fira-code
       pkgs.iosevka
     ];
   };

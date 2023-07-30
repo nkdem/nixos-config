@@ -25,7 +25,7 @@ in {
     pkgs.firefox
     pkgs.rofi
     pkgs.vscode
-    pkgs.xorg.xev
+    pkgs.gnome.gnome-keyring
   ];
 
   #---------------------------------------------------------------------
@@ -51,6 +51,10 @@ in {
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
+
+  programs.zsh = {
+      enable = true;
+  };
 
   programs.git = {
     enable = true;
@@ -108,19 +112,7 @@ in {
             bbenoist.nix
             mkhl.direnv
             rust-lang.rust-analyzer
-            # github.copilot
+            github.copilot
         ];
-        userSettings = {
-            "telemetry.telemetryLevel" = "off";
-            "workbench.colorTheme" = "Ayu Mirage Bordered";
-            "workbench.sideBar.location" = "right";
-            "editor.fontFamily" = "Iosevka";
-            "editor.fontLigatures" = true;
-            "editor.fontSize" = 15;
-            "editor.fontWeight" = "500";
-            "window.zoomLevel" = 0.5;
-            "terminal.integrated.fontSize" = 15;
-            "editor.titleBar.enabled" = false;
-        };
     };
 }
