@@ -51,7 +51,9 @@
   services.xserver = {
     enable = true;
     layout = "gb";
-    dpi = 220;
+    xkbVariant = "mac";
+    xkbOptions = "caps:super,ctrl:swap_lwin_lctl";
+    dpi = 130;
 
     desktopManager = {
       xterm.enable = false;

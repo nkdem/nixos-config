@@ -1,5 +1,5 @@
 configuration {
-  dpi: 220;
+  dpi: 130;
   font: "Iosevka";
 }
 @theme "android_notification"

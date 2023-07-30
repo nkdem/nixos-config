@@ -25,6 +25,7 @@ in {
     pkgs.firefox
     pkgs.rofi
     pkgs.vscode
+    pkgs.xorg.xev
   ];
 
   #---------------------------------------------------------------------
@@ -107,6 +108,7 @@ in {
             bbenoist.nix
             mkhl.direnv
             rust-lang.rust-analyzer
+            # github.copilot
         ];
         userSettings = {
             "telemetry.telemetryLevel" = "off";
