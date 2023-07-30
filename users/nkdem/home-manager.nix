@@ -55,11 +55,6 @@ in {
     enable = true;
     userName = "nkdem";
     userEmail = "contact@nkdem.net";
-    # Need to fix GPG keys
-    # signing = {
-    #   key = "668FD3DA7D781978";
-    #   signByDefault = true;
-    # };
     extraConfig = {
       github.user = "nkdem";
       push.default = "tracking";
@@ -92,14 +87,6 @@ in {
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    pinentryFlavor = "tty";
-
-    defaultCacheTtl = 31536000;
-    maxCacheTtl = 31536000;
   };
 
   xresources.extraConfig = builtins.readFile ./Xresources;
