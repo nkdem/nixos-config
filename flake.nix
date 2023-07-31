@@ -18,16 +18,17 @@
     };
   };
 
-    unstable-overlay = final: prev: {
+  
+
+  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable }@inputs: let
+    mkVM = import ./lib/mkvm.nix;
+    unstableOverlay = final: prev: {
       unstable = import nixpkgs-unstable {
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
     };
-
-  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable }@inputs: let
-    mkVM = import ./lib/mkvm.nix;
-    overlays = [ unstable-overlay ];
+    overlays = [ unstableOverlay ];
   in {
     nixosConfigurations.vm-intel-utm = mkVM "vm-intel-utm" rec {
       inherit nixpkgs home-manager overlays;
