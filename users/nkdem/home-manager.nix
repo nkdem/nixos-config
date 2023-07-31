@@ -1,13 +1,11 @@
 { config, lib, pkgs, ... }:
 
-let
-  sources = import ../../nix/sources.nix;
-in {
+{
   imports = [ ./direnv.nix ];
 
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
-  home.stateVersion = "18.09";
+  home.stateVersion = "23.05";
 
   xdg.enable = true;
 
@@ -19,13 +17,10 @@ in {
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = [
-    pkgs.jq
-    pkgs.ripgrep
-    pkgs.tree
     pkgs.firefox
     pkgs.rofi
-    pkgs.vscode
     pkgs.gnome.gnome-keyring
+    pkgs.unstable.vscode
   ];
 
   #---------------------------------------------------------------------
@@ -39,9 +34,6 @@ in {
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
   };
-
-  home.file.".gdbinit".source = ./gdbinit;
-  home.file.".inputrc".source = ./inputrc;
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
   xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
@@ -89,9 +81,8 @@ in {
     };
   };
 
-  programs.neovim = {
+  programs.vim = {
     enable = true;
-    package = pkgs.neovim-nightly;
   };
 
   xresources.extraConfig = builtins.readFile ./Xresources;
@@ -103,16 +94,4 @@ in {
     size = 128;
     x11.enable = true;
   };
-
-      programs.vscode = {
-        enable = true;
-        package = pkgs.vscode;
-        extensions = with pkgs.vscode-extensions; [
-            # ayu-theme.vscode-ayu
-            bbenoist.nix
-            mkhl.direnv
-            rust-lang.rust-analyzer
-            github.copilot
-        ];
-    };
 }

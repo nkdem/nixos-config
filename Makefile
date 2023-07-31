@@ -17,9 +17,9 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 UNAME := $(shell uname)
 
 switch:
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
+	sudo nixos-rebuild switch --flake ".#${NIXNAME}"
 test:
-	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild test --flake ".#$(NIXNAME)"
+	sudo nixos-rebuild test --flake ".#$(NIXNAME)"
 # bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive
 # and just set the password of the root user to "root". This will install
 # NixOS. After installing NixOS, you must reboot and set the root password
@@ -83,5 +83,5 @@ vm/copy:
 # have to run vm/copy before.
 vm/switch:
 	ssh $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR) " \
-		sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake \"/nix-config#${NIXNAME}\" \
+		sudo nixos-rebuild switch --flake \"/nix-config#${NIXNAME}\" \
 	"

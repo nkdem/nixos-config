@@ -11,7 +11,7 @@
     home = "/home/nkdem";
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
-    initialPassword = "test";
+    initialHashedPassword = "$y$j9T$7SxCjszO7O.4smU/mz3Vb1$3ZDkknPnj3dK9vgxFBTZIFKuwvjqLxKkifF0ZmD1Ig8";
   };
 
 }

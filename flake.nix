@@ -12,30 +12,25 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
-
+      
       # We want to use the same set of nixpkgs as our system.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # I think technically you're not supposed to override the nixpkgs
-    # used by neovim but recently I had failures if I didn't pin to my
-    # own. We can always try to remove that anytime.
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-    mkVM = import ./lib/mkvm.nix;
+    unstable-overlay = final: prev: {
+      unstable = import nixpkgs-unstable {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+    };
 
-    # Overlays is the list of overlays we want to apply from flake inputs.
-    overlays = [
-      inputs.neovim-nightly-overlay.overlay
-    ];
+  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable }@inputs: let
+    mkVM = import ./lib/mkvm.nix;
+    overlays = [ unstable-overlay ];
   in {
     nixosConfigurations.vm-intel-utm = mkVM "vm-intel-utm" rec {
-      inherit overlays nixpkgs home-manager;
+      inherit nixpkgs home-manager overlays;
       system = "x86_64-linux";
       user   = "nkdem";
     };

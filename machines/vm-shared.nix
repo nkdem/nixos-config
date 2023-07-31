@@ -14,18 +14,11 @@
     '';
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    # Needed for k2pdfopt 2.53.
-    "mupdf-1.17.0"
-  ];
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # VMware, Parallels both only support this being 0 otherwise you see
-  # "error switching console mode" on boot.
-  boot.loader.systemd-boot.consoleMode = "0";
+  # boot.loader.systemd-boot.consoleMode = "0";
 
   # Define your hostname.
   networking.hostName = "dev";
@@ -52,7 +45,6 @@
     enable = true;
     layout = "gb";
     xkbVariant = "mac";
-    xkbOptions = "caps:super,ctrl:swap_lwin_lctl";
     dpi = 130;
 
     desktopManager = {
@@ -77,7 +69,6 @@
   # fonts require a purchase.
   fonts = {
     fontDir.enable = true;
-
     fonts = [
       pkgs.iosevka
     ];
@@ -88,8 +79,8 @@
   environment.systemPackages = with pkgs; [
     gnumake
     killall
-    rxvt_unicode
-    xclip
+    # rxvt_unicode
+    # xclip
 
     # For hypervisors that support auto-resizing, this script forces it.
     # I've noticed not everyone listens to the udev events so this is a hack.
@@ -113,5 +104,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 }
