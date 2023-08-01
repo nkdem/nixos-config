@@ -21,6 +21,7 @@
     pkgs.rofi
     pkgs.gnome.gnome-keyring
     pkgs.unstable.vscode
+    pkgs.nil # nix-lsp
   ];
 
   #---------------------------------------------------------------------
@@ -33,6 +34,10 @@
     LC_ALL = "en_GB.UTF-8";
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
+  };
+
+  home.shellAliases = {
+    refresh-display = "xrandr --output Virtual-1 --auto"; # For QEMU VMs
   };
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
